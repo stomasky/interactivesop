@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Interactive SOP Log In{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+  <div class="form-group">
+    <label for="password"></label>
+    <input
+    type="password"
+    class="form-control"
+    id="password"
+    name="password"
+    placeholder="Enter Password"
+    />
+  </div>
+  <br />
+  <button type="submit" class="btn btn-secondary btn-lg">Submit</button>
+</form>
+
+{% endblock %}

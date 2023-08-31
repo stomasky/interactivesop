@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Add a SKU{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Add a SKU</h1>
+
+<form method="POST">
+  <div class="form-group">
+    <label for="SKU">SKU:</label>
+    <input
+    type="text"
+    class="form-control"
+    id="SKU"
+    name="SKU"
+    placeholder="Enter SKU"
+    />
+  </div>
+
+  <br />
+
+  <div class="form-group">
+    <label for="channel">Channel:</label>
+    <select class="custom-select" id="channel" name="channel" required>
+      <option value="">Select a Channel</option>
+      <option value="Shelf">Shelf</option>
+      <option value="Case">Case</option>
+      <option value="Amazon">Amazon</option>
+      <option value="Chewy">Chewy</option>
+    </select>
+
+  </div>
+
+  <br />
+
+  <div class="form-group">
+    <label for="container">Container:</label>
+    <select class="custom-select" id="container" name="container" required>
+      <option value="">Select a Container</option>
+      <option value="Shelf">Shelf</option>
+      <option value="Box">Box</option>
+    </select>
+  </div>
+
+  <br />
+
+  <div class="form-group">
+    <label for="units_per_container">Units per Container:</label>
+    <input
+    type="text"
+    class="form-control"
+    id="units_per_container"
+    name="units_per_container"
+    placeholder="How many units are produced per container?"
+    />
+  </div>
+  
+  <br />
+
+  <div class="form-group">
+    <label for="box_size">Box Size:</label>
+    <select class="custom-select" id="box_size" name="box_size" required>
+      <option value="">Select Box Size</option>
+      <option value="N/A">N/A</option>
+      <option value="14 x 12 x 10">14 x 12 x 10</option>
+      <option value="14 x 10 x 12">14 x 10 x 12</option>
+      <option value="13 x 13 x 12">13 x 13 x 12</option>
+      <option value="12 x 12 x 12">12 x 12 x 12</option>
+      <option value="11-1/4 x 8-3/4 x 10">11-1/4 x 8-3/4 x 10</option>
+      <option value="11-1/4 x 8-3/4 x 6">11-1/4 x 8-3/4 x 6</option>
+      <option value="10 x 8 x 6">10 x 8 x 6</option>
+      <option value="10 x 7 x 5">10 x 7 x 5</option>
+      <option value="8 x 8 x 9">8 x 8 x 9</option>
+      <option value="8 x 6 x 4">8 x 6 x 4</option>
+      <option value="6 x 6 x 7">6 x 6 x 7</option>
+      <option value="6 x 5 x 4">6 x 5 x 4</option>
+      <option value="6 x 4 x 4">6 x 4 x 4</option>
+    </select>
+  </div>
+
+  <br />
+
+  <div class="form-group">
+    <label for="bag_y_n">Does this go in a bag?</label>
+    <select class="custom-select" id="bag_y_n" name="bag_y_n" required>
+      <option value="No">No</option>
+      <option value="Yes">Yes</option>
+    </select>
+  </div>
+
+  <br />
+
+  <div class="form-group">
+    <label for="bag_size">Bag Size:</label>
+    <select class="custom-select" id="bag_size" name="bag_size" required>
+      <option value="">Select Bag Size</option>
+      <option value="N/A">N/A</option>
+      <option value="10 x 12">10 x 12</option>
+      <option value="5 x 10">5 x 10</option>
+      <option value="4 x 10">4 x 10</option>
+    </select>
+  </div>
+
+  <br />
+
+  <div class="form-group">
+    <label for="sprayer_cap">Does use sprayers or caps?</label>
+    <select class="custom-select" id="sprayer_cap" name="sprayer_cap" required>
+      <option value="">Select Lid</option>
+      <option value="Sprayers">Sprayers</option>
+      <option value="Caps">Caps</option>
+    </select>
+  </div>
+  
+  <br />
+
+  <button type="submit" class="btn btn-secondary btn-lg">Submit</button>
+</form>
+
+{% endblock %}

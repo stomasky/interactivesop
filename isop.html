@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form-inline">
+  <label for="SKU_input">SKU:</label>
+    <select class="custom-select" id="SKU_input" name="SKU_input" required>
+      <option value="">Select SKU</option>
+      {% set skus_list = [] %}
+      {% for row in product_data %}
+      {{ skus_list.append(row.SKU) }}
+      {% endfor %}
+      {% for item in skus_list|unique %}
+      <option >{{item}}</option>
+      {% endfor %}
+    </select>
+    
+    <label for="channel_input">Channel:</label>
+    <select class="custom-select" id="channel_input" name="channel_input" required>
+      <option value="">Select Channel</option>
+      {% set chan_list = [] %}
+      {% for row in product_data %}
+      {{ chan_list.append(row.channel) }}
+      {% endfor %}
+      {% for item in chan_list|unique %}
+      <option >{{item}}</option>
+      {% endfor %}
+    </select>
+
+  </br>
+    
+    <label for="WO_quant">Goal Units:</label>
+    <input
+    type="text"
+    class="form-control"
+    id="WO_quant"
+    name="WO_quant"
+    />
+
+    <button type="submit" class="btn btn-secondary btn-lg">Submit</button>
+</form>
+
+{% set SKU_input = request.args.get('SKU_input') %}
+{% set channel_input = request.args.get('channel_input') %}
+{% set WO_quant = request.args.get('WO_quant')%}
+{% set SKUchannel_input = SKU_input|string + channel_input|string %}
+
+
+{% for row in product_data %}
+  {% if row.SKUchannel == SKUchannel_input %}
+
+<div class="album py-5">
+  <div class="container">
+
+    {% if row.container == "Box" %}
+    {% set box_quantity = WO_quant|int / row.units_per_container|int %}
+    {% set box_quantity = box_quantity|round(0, 'ceil') %}
+    {% set box_quantity = box_quantity|int %}
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+            <rect width="100%" height="100%" fill="white"></rect>
+            <image href="static/box.png" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" />
+          </svg>
+          <div class="card-body">
+            <h2 class="card-text">{{box_quantity}} Boxes/Cajas </h2> 
+            <p class="card-text"></p>{{row.box_size}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    {% endif %}
+
+    {% if row.container == "Shelf" %}
+    {% set shelf_quantity = WO_quant|int / row.units_per_container|int %}
+    {% set shelf_quantity = shelf_quantity|round(0, 'ceil') %}
+    {% set shelf_quantity = shelf_quantity|int %}
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+            <rect width="100%" height="100%" fill="white"></rect>
+            <image href="static/shelf.png" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" />
+          </svg>
+          <div class="card-body">
+            <h2 class="card-text">{{shelf_quantity}} Shelves/Estantes </h2> 
+            <div class="d-flex justify-content-between align-items-center">
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    {% endif %}
+
+    {% if row.sprayer_cap == "Sprayers" %}
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+            <rect width="100%" height="100%" fill="white"></rect>
+            <image href="static/sprayer.jpg" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" />
+          </svg>
+          <div class="card-body">
+            <h2 class="card-text"> Sprayers/Pulverizadores </h2>
+            <div class="d-flex justify-content-between align-items-center">
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    {% endif %}
+
+    {% if row.sprayer_cap == "Caps" %}
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+            <rect width="100%" height="100%" fill="white"></rect>
+            <image href="static/cap.png" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" />
+          </svg>
+          <div class="card-body">
+            <h2 class="card-text"> Caps/Tapas </h2>
+            <div class="d-flex justify-content-between align-items-center">
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    {% endif %}
+
+    {% if row.bag_y_n == "Yes" %}
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+            <rect width="100%" height="100%" fill="white"></rect>
+            <image href="static/bag.png" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" />
+          </svg>
+          <div class="card-body">
+            <h2 class="card-text"> Bags/Balsas </h2> 
+            <p class="card-text"></p>{{row.bag_size}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    {% endif %}
+
+  
+
+  </div>
+</div>
+
+
+  {% endif %}{% endfor %}
+{% endblock %}
